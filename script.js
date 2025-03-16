@@ -9,7 +9,7 @@ const settingsForm = document.getElementById("settings-form");
 const difficultySelect = document.getElementById("difficulty");
 const progress = document.getElementById("progress");
 
-// List of words for the game
+
 const words = [
 "Aizen",  
 "Tense",  
@@ -54,24 +54,20 @@ let difficulty =
 
 let timeInterval;
 
-// Get a random word from the array
 function getRandomWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
 
-// Add a random word to the DOM
 function addWordToDom() {
   randomWord = getRandomWord();
   word.innerText = randomWord;
 }
 
-// Update the score
 function updateScore() {
   score++;
   scoreElement.innerText = score;
 }
 
-// Update the timer and progress bar
 function updateTime() {
   time--;
   timeElement.innerText = time + "s";
@@ -83,7 +79,6 @@ function updateTime() {
   }
 }
 
-// End the game
 function gameOver() {
   endgameElement.innerHTML = `
     <h1>Game Over!</h1>
@@ -93,7 +88,6 @@ function gameOver() {
   endgameElement.style.display = "flex";
 }
 
-// Event listener for typing input
 text.addEventListener("input", (e) => {
   const insertedText = e.target.value.trim(); 
   if (insertedText === randomWord) {
@@ -101,16 +95,15 @@ text.addEventListener("input", (e) => {
     addWordToDom(); 
     updateScore(); 
 
-    // difficulty
+   
     if (difficulty === "hard") time += 2;
     else if (difficulty === "medium") time += 3;
     else time += 5;
 
-    updateTime(); // update the timer
+    updateTime(); 
   }
 });
 
-// toggle settings visibility
 settingsButton.addEventListener("click", () =>
   settings.classList.toggle("hide")
 );
@@ -121,7 +114,6 @@ settingsForm.addEventListener("change", (e) => {
   localStorage.setItem("difficulty", difficulty);
 });
 
-// Initialize the game
 function init() {
   difficultySelect.value = difficulty;
   addWordToDom();
